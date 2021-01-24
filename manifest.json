@@ -1,7 +1,7 @@
 {
     "name": "Cubic",
     "short_name": "Cubic",
-    "start_url": "index.html",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#ff00ed",
     "theme_color": "#ff00ed",
