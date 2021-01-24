@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
+    <meta name="description" content="A music visualizer using cube which eventually creates a flower while dancing to the beats of the song.">
+    <meta property="og:title" content="Cubic: Music visualizer"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:description" content="A musci visualizer using cube which eventually creates a flower while dancing to the beats of the song."/>
+    <meta property="og:image" content="./assets/icons/icon-512x512.png">
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Cubic"/>
+    <meta name="theme-color" content="#ff00ed"/>
+
+    <link rel="apple-touch-icon" sizes="32x32" href="assets/icons/icon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/icons/icon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/play.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="lib/p5.js" type="text/javascript"></script>
+    <script src="lib/p5.sound.min.js" type="text/javascript"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-187986597-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-187986597-1');
+    </script>
+    
+    <title>Cubic | Music Visualizer</title>
+</head>
+<body> 
+    <div id="wrapper">
+        <div class="share">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="var-color"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            <div>Share</div>
+        </div>
+        <div class="share-overlay">
+        </div>
+        <div class="share-notify">Link copied to clipboard</div>
+        <div class="share-container">
+            <div class="share-container--head">
+                <div>Share with your friends!</div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="18" fill="#eee" class="close-svg">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+                </svg>
+            </div>
+            <div class="share-container--body">
+                <input class="share-inp" type="text" value="https://cypher25.github.io/cubic" readonly>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </div>
+        <div class="music-controls">
+            <div class="play play--show" onclick="toggleSong();">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="var-color"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 13.5v-7c0-.41.47-.65.8-.4l4.67 3.5c.27.2.27.6 0 .8l-4.67 3.5c-.33.25-.8.01-.8-.4z"/></svg>
+            </div>
+            <div class="pause" onclick="toggleSong();">
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" class="var-color"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M10,16L10,16c-0.55,0-1-0.45-1-1V9 c0-0.55,0.45-1,1-1l0,0c0.55,0,1,0.45,1,1v6C11,15.55,10.55,16,10,16z M14,16L14,16c-0.55,0-1-0.45-1-1V9c0-0.55,0.45-1,1-1l0,0 c0.55,0,1,0.45,1,1v6C15,15.55,14.55,16,14,16z"/></g></g></svg>
+            </div>
+            <div class="song-title"></div>
+            <label class="upload-file">
+                <input class="upload" type="file" accept="audio/*">
+                    <svg version="1.1" class="upload-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	                    viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <g><g><path class="upload-svg" d="M472,312.642v139c0,11.028-8.972,20-20,20H60c-11.028,0-20-8.972-20-20v-139H0v139c0,33.084,26.916,60,60,60h392
+			            c33.084,0,60-26.916,60-60v-139H472z"/></g></g><g><g><polygon points="256,0.358 131.716,124.642 160,152.926 236,76.926 236,388.642 276,388.642 276,76.926 352,152.926 
+                        380.284,124.642"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                    </svg>
+                <span class="upload-text">Upload Your Song</span>
+            </label>
+        </div>
+        <div class="ray-caster ctop"></div> 
+        <div class="ray-caster cleft"></div>
+        <div class="ray-caster cright"></div>
+        <div class="ray-caster cbottom"></div>
+    </div>
+    <div class="loading-wrapper">
+        <div class="loading">
+            <img src="assets/169.gif" />
+        </div>
+    </div>    
+   
+    <script src="scripts/register.js" type="text/javascript"></script>
+    <script src="scripts/cube.js" type="text/javascript"></script>
+    <script src="scripts/data.js" type="text/javascript"></script>
+    <script src="scripts/sketch.js" type="text/javascript"></script>
+    <script src="scripts/share.js" type="text/javascript"></script>
+</body>
+</html>

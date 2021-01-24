@@ -1,0 +1,351 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    overflow: hidden;
+    font-family: "Montserrat", sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+#wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.music-controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 4.5rem;
+    right: 4.5rem;
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.5s ease;
+}
+
+.music-controls--hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.play,
+.pause {
+    height: 3.8rem;
+    width: 3.8rem;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    pointer-events: 0;
+    transition: opacity 0.5s ease;
+}
+
+.play svg,
+.pause svg {
+    height: 100%;
+    width: 100%;
+}
+
+.play--show {
+    opacity: 1;
+    pointer-events: all;
+}
+.pause--show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.song-title {
+    margin: 3.8rem 0 1rem 0;
+    font-size: 13px;
+    width: 10rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #eee;
+}
+
+.upload-file {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.5s ease-in-out;
+    width: 12rem;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upload-file svg {
+    height: 1.4rem;
+    width: 1.4rem;
+    fill: #eee;
+}
+
+.upload-file input[type="file"] {
+    display: none;
+}
+
+.upload-file--show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+@media only screen and (max-width: 700px) {
+    .music-controls {
+        top: 72%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+    }
+
+    .title {
+        margin-bottom: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .music-controls {
+        top: 65%;
+    }
+}
+
+.ray-caster {
+    position: absolute;
+    display: inline;
+}
+
+.ctop {
+    top: 0;
+    width: 100%;
+    height: 2rem;
+    border-radius: 70%;
+    transform: translateY(-2rem);
+    transition: all 0.1s ease-in-out;
+}
+.cleft {
+    left: 0;
+    height: 100%;
+    width: 2rem;
+    border-radius: 70%;
+    transform: translateX(-2rem);
+    transition: all 0.1s ease-in-out;
+}
+.cright {
+    right: 0;
+    height: 100%;
+    width: 2rem;
+    border-radius: 70%;
+    transform: translateX(2rem);
+    transition: all 0.1s ease-in-out;
+}
+.cbottom {
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+    border-radius: 70%;
+    transform: translateY(2rem);
+    transition: all 0.1s ease-in-out;
+}
+
+@media only screen and (max-width: 700px) {
+    .ctop,
+    .cleft,
+    .cright,
+    .cbottom {
+        transition: all 0.17s ease-in-out;
+    }
+}
+
+.loading-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #141414;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+.hide {
+    opacity: 0;
+    z-index: -1;
+}
+
+.share {
+    background: #141414;
+    position: absolute;
+    top: 5.5rem;
+    left: 4rem;
+    font-size: 12px;
+    color: #eee;
+    cursor: pointer;
+    text-align: center;
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.5s ease;
+}
+
+.share svg {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.share--hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.share-notify {
+    display: inline;
+    background: #212121;
+    padding: 1rem 1.4rem;
+    border-radius: 8px;
+    width: 20rem;
+    font-size: 14px;
+    color: #eee;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    bottom: -5rem;
+    left: 2rem;
+    transition: all 0.8s ease;
+}
+
+.share-notify--show {
+    bottom: 2rem;
+    opacity: 1;
+    z-index: 3;
+}
+
+.share-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.share-overlay--show {
+    display: flex;
+}
+
+.share-container {
+    position: absolute;
+    background: #141414;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    height: 8rem;
+    width: 35rem;
+    border-radius: 16px;
+    color: #eee;
+    font-weight: lighter;
+    padding: 1.2rem 1.2rem 1.4rem 1.2rem;
+    z-index: 2;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.share-container--show {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.share-container--head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-svg {
+    height: 1.4rem;
+    width: 1.4rem;
+    cursor: pointer;
+}
+
+.share-container--body {
+    width: 100%; 
+    background: #212121;
+    display: flex;
+    justify-content: space-between;
+}
+
+.share-inp {
+    background: #212121;
+    color: #eee;
+    border: 0;
+    width: 80%;
+    padding: 0.5rem 0.8rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.share-inp:focus {
+    outline: 0;
+}
+
+.copy-btn {
+    width: 4rem;
+    background: #212121;
+    border: 0;
+    color: #ff00ed;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media only screen and (max-width: 700px) {
+    .share {
+        top: 1.2rem;
+        left: 85%;
+        font-size: 12px;
+    }
+
+    .share svg {
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+
+    .share-notify {
+        left: 50%;
+        width: 85%;
+        font-size: 12px;
+        transform: translateX(-50%);
+    }
+
+    .share-container {
+        width: 85%;
+    }
+}

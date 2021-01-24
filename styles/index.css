@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.background {
+    height: 100%;
+    width: 100%;
+    background: url("../assets/covers/desktop/ts.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.8s ease-in-out;
+}
+
+.skin {
+    background: #111;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+}
+
+.bubble {
+    position: absolute;
+    height: 25rem;
+    width: 25rem;
+    border-radius: 50%;
+    background: #ff00ed;
+    top: 0;
+    right: 0;
+    transform: translate(60%, -30%);
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.8s ease-in-out;
+    z-index: 0;
+}
+
+.bubblet {
+    position: absolute;
+    height: 25rem;
+    width: 25rem;
+    border-radius: 50%;
+    background: rgb(255, 0, 237);
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 30%);
+    box-shadow: 2px -3px 25px rgba(0, 0, 0, 0.3);
+    transition: background 0.8s ease-in-out;
+    z-index: 0;
+}
+
+.cover {
+    display: grid;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 10rem 10rem 15rem 10rem;
+    text-align: center;
+    grid-template-areas: ".song-name .artist";
+    grid-template-columns: 50% 50%;
+}
+
+.song-name {
+    text-align: left;
+    font-size: 80px;
+    font-weight: 800;
+    align-self: center;
+    text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.artist {
+    text-align: right;
+    font-size: 60px;
+    align-self: flex-end;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.quote {
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.play-btn {
+    position: absolute;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    bottom: 4.5rem;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    cursor: pointer;
+    padding: 1rem 3.5rem;
+    background: #ff00ed;
+    border-radius: 1.8rem;
+    font-weight: 500;
+    font-size: 22px;
+    box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.3);
+    transition: background 0.8s ease-in-out;
+}
+
+.play-btn:hover {
+    background: #e400d5;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    height: 3rem;
+    width: 3rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.prev {
+    left: 2rem;
+}
+
+.next {
+    right: 2rem;
+}
+
+.swipe {
+    display: none;
+    position: absolute;
+    font-size: 12px;
+    top: 50%;
+    right: 2rem;
+    translate: transformY(50%);
+    text-align: center;
+    width: 2.2rem;
+    border-radius: 8px;
+}
+.swipe div {
+    position: absolute;
+    top: 0.3rem;
+    overflow: hidden;
+    z-index: 2;
+}
+.swipe svg {
+    display: block;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+@keyframes swipe-left {
+    from {
+        transform: translateX(0rem);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-4rem);
+        opacity: 0;
+    }
+}
+
+.warning {
+    display: none;
+}
+
+.install-btn {
+    display: inline;
+    background: #ff00ed;
+    box-shadow: 1px 3px 8px rgba(0,0,0,0.3);
+    border-radius: 22px;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.install-btn--show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+@media only screen and (max-width: 700px) {
+    .background {
+        background-image: url("../assets/covers/mobile/ts_m.jpg");
+        background-size: cover;
+    }
+
+    .cover {
+        grid-template-areas: "song-name song-name" "artist artist";
+        grid-template-rows: 65% 35%;
+        padding: 10rem 2rem;
+    }
+
+    .song-name {
+        grid-area: song-name;
+        justify-self: start;
+        align-self: start;
+        font-size: 45px;
+        z-index: 99;
+    }
+
+    .artist {
+        grid-area: artist;
+        font-size: 35px;
+        align-self: center;
+        justify-self: end;
+        z-index: 99;
+    }
+
+    .quote {
+        font-size: 14px;
+    }
+
+    .play-btn {
+        bottom: 1rem;
+        padding: 0.8rem 2.6rem;
+        font-size: 20px;
+        box-shadow: 1px 3px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .swipe {
+        display: block;
+    }
+
+    .bubble,
+    .bubblet {
+        width: 18rem;
+        height: 18rem;
+    }
+
+    .warning {
+        display: none;
+        align-items: center;
+        position: absolute;
+        top: 0rem;
+        left: 50%;
+        width: 80%;
+        transform: translate(-50%, 50%);
+        transition: opacity 0.5s ease;
+        background: rgb(235, 235, 235);
+        color: #111;
+        border-radius: 16px;
+        font-size: 14px;
+        padding: 0.6rem 0.8rem;
+        line-height: 1.2rem;
+        border: 0;
+        box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3);
+        opacity: 1;
+    }
+
+    .warning--hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .install-btn {
+        left: 1rem;
+        top: 1rem;
+        font-size: 14px;
+        padding: 0.5rem 1rem;
+    }
+}
