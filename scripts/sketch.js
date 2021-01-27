@@ -153,3 +153,10 @@ function onInactivity(timeout, callback) {
             wait = setTimeout(callback, timeout);
         }
 }
+
+// In-App Installaiton
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+});
